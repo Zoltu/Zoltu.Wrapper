@@ -23,7 +23,6 @@ namespace Zoltu.Wrapper.System.Diagnostics
 		{
 			get
 			{
-				Contract.Assume(_systemProcessModule.FileName != null);
 				return _systemProcessModule.FileName;
 			}
 		}
@@ -32,7 +31,9 @@ namespace Zoltu.Wrapper.System.Diagnostics
 		{
 			get
 			{
-				return new FileVersionInfo(_systemProcessModule.FileVersionInfo);
+				var fileVersionInfo = _systemProcessModule.FileVersionInfo;
+				Contract.Assume(fileVersionInfo != null);
+				return new FileVersionInfo(fileVersionInfo);
 			}
 		}
 
