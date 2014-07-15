@@ -15,6 +15,7 @@ namespace Zoltu.Wrapper.System.Diagnostics
 
 		public ProcessModule(global::System.Diagnostics.ProcessModule systemProcessModule)
 		{
+			Contract.Requires(systemProcessModule != null);
 			_systemProcessModule = systemProcessModule;
 		}
 
@@ -22,6 +23,7 @@ namespace Zoltu.Wrapper.System.Diagnostics
 		{
 			get
 			{
+				Contract.Assume(_systemProcessModule.FileName != null);
 				return _systemProcessModule.FileName;
 			}
 		}

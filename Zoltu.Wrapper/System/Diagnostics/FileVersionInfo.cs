@@ -15,6 +15,7 @@ namespace Zoltu.Wrapper.System.Diagnostics
 
 		public FileVersionInfo(global::System.Diagnostics.FileVersionInfo systemFileVersionInfo)
 		{
+			Contract.Requires(systemFileVersionInfo != null);
 			_systemFileVersionInfo = systemFileVersionInfo;
 		}
 
