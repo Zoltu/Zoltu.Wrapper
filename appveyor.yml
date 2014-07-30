@@ -3,9 +3,6 @@ version: "{build}"
 assembly_info:
   patch: false
 
-platform:
-  - AnyCPU
-
 configuration:
   - Release
 
