@@ -4,12 +4,10 @@ assembly_info:
   patch: false
 
 platform:
-  - AnyCPU
+  - Any CPU
 
 configuration:
   - Release
-
-verbosity: minimal
 
 before_build:
   - cmd: nuget restore
