@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 
-namespace Zoltu.Wrapper.System.Net
+namespace Zoltu.Wrapper.SystemWrapper.Net
 {
 	[ContractClass(typeof(IDnsStaticContracts))]
 	public interface IDnsStatic

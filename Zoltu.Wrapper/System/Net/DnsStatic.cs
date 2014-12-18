@@ -1,4 +1,4 @@
-﻿namespace Zoltu.Wrapper.System.Net
+﻿namespace Zoltu.Wrapper.SystemWrapper.Net
 {
 	public class DnsStatic : IDnsStatic
 	{

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 
-namespace Zoltu.Wrapper.System.Diagnostics
+namespace Zoltu.Wrapper.SystemWrapper.Diagnostics
 {
 	[ContractClass(typeof(IProcessModuleContracts))]
 	public interface IProcessModule

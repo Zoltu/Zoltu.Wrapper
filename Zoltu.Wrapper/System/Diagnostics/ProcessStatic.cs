@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Zoltu.Wrapper.System.Diagnostics
+namespace Zoltu.Wrapper.SystemWrapper.Diagnostics
 {
 	public class ProcessStatic : IProcessStatic
 	{

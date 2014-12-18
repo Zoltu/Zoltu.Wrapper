@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 
-namespace Zoltu.Wrapper.System.Diagnostics
+namespace Zoltu.Wrapper.SystemWrapper.Diagnostics
 {
 	[ContractClass(typeof(IProcessContracts))]
 	public interface IProcess

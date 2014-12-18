@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zoltu.Wrapper.System.Diagnostics
+namespace Zoltu.Wrapper.SystemWrapper.Diagnostics
 {
 	public interface IFileVersionInfo
 	{
