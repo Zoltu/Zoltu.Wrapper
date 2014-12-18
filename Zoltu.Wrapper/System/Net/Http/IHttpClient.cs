@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Zoltu.Wrapper.SystemWrapper.Net.Http
 {
+	[ContractClass(typeof(IHttpClientContract))]
 	public interface IHttpClient : IDisposable
 	{
 		Uri BaseAddress { get; set; }
@@ -48,6 +49,263 @@ namespace Zoltu.Wrapper.SystemWrapper.Net.Http
 		Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken);
 	}
 
+	[ContractClassFor(typeof(IHttpClient))]
+	abstract class IHttpClientContract : IHttpClient
+	{
+		public abstract Uri BaseAddress { get; set; }
+		public HttpRequestHeaders DefaultRequestHeaders
+		{
+			get
+			{
+				Contract.Ensures(Contract.Result<HttpRequestHeaders>() != null);
+				return default(HttpRequestHeaders);
+			}
+		}
+		public Int64 MaxResponseContentBufferSize
+		{
+			get
+			{
+				Contract.Ensures(Contract.Result<Int64>() > 0);
+				return default(Int64);
+			}
+			set
+			{
+				Contract.Requires(value > 0);
+			}
+		}
+		public TimeSpan Timeout
+		{
+			get
+			{
+				// FIXME: This should be (result >= TimeSpan.Zero || result == infinite) but a bug in Code Contracts is causing validation of that to fail
+				Contract.Ensures(Contract.Result<TimeSpan>() >= System.Threading.Timeout.InfiniteTimeSpan);
+				return default(TimeSpan);
+			}
+			set
+			{
+				Contract.Requires(value > TimeSpan.Zero || value == System.Threading.Timeout.InfiniteTimeSpan);
+			}
+		}
+
+		public abstract void CancelPendingRequests();
+
+		public Task<HttpResponseMessage> DeleteAsync(String requestUri)
+		{
+			Contract.Requires(requestUri != null || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> DeleteAsync(Uri requestUri)
+		{
+			Contract.Requires((requestUri != null && (requestUri.IsAbsoluteUri || BaseAddress != null)) || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> DeleteAsync(String requestUri, CancellationToken cancellationToken)
+		{
+			Contract.Requires(requestUri != null || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> DeleteAsync(Uri requestUri, CancellationToken cancellationToken)
+		{
+			Contract.Requires((requestUri != null && (requestUri.IsAbsoluteUri || BaseAddress != null)) || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public abstract void Dispose();
+
+		public Task<HttpResponseMessage> GetAsync(String requestUri)
+		{
+			Contract.Requires(requestUri != null || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> GetAsync(Uri requestUri)
+		{
+			Contract.Requires((requestUri != null && (requestUri.IsAbsoluteUri || BaseAddress != null)) || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> GetAsync(String requestUri, CancellationToken cancellationToken)
+		{
+			Contract.Requires(requestUri != null || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> GetAsync(String requestUri, HttpCompletionOption completionOption)
+		{
+			Contract.Requires(requestUri != null || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> GetAsync(Uri requestUri, CancellationToken cancellationToken)
+		{
+			Contract.Requires((requestUri != null && (requestUri.IsAbsoluteUri || BaseAddress != null)) || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> GetAsync(Uri requestUri, HttpCompletionOption completionOption)
+		{
+			Contract.Requires((requestUri != null && (requestUri.IsAbsoluteUri || BaseAddress != null)) || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> GetAsync(String requestUri, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+		{
+			Contract.Requires(requestUri != null || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> GetAsync(Uri requestUri, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+		{
+			Contract.Requires((requestUri != null && (requestUri.IsAbsoluteUri || BaseAddress != null)) || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<Byte[]> GetByteArrayAsync(String requestUri)
+		{
+			Contract.Requires(requestUri != null || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<Byte[]>>() != null);
+			return null;
+		}
+
+		public Task<Byte[]> GetByteArrayAsync(Uri requestUri)
+		{
+			Contract.Requires((requestUri != null && (requestUri.IsAbsoluteUri || BaseAddress != null)) || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<Byte[]>>() != null);
+			return null;
+		}
+
+		public Task<Stream> GetStreamAsync(String requestUri)
+		{
+			Contract.Requires(requestUri != null || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<Stream>>() != null);
+			return null;
+		}
+
+		public Task<Stream> GetStreamAsync(Uri requestUri)
+		{
+			Contract.Requires((requestUri != null && (requestUri.IsAbsoluteUri || BaseAddress != null)) || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<Stream>>() != null);
+			return null;
+		}
+
+		public Task<String> GetStringAsync(String requestUri)
+		{
+			Contract.Requires(requestUri != null || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<String>>() != null);
+			return null;
+		}
+
+		public Task<String> GetStringAsync(Uri requestUri)
+		{
+			Contract.Requires((requestUri != null && (requestUri.IsAbsoluteUri || BaseAddress != null)) || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<String>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> PostAsync(String requestUri, HttpContent content)
+		{
+			Contract.Requires(requestUri != null || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> PostAsync(Uri requestUri, HttpContent content)
+		{
+			Contract.Requires((requestUri != null && (requestUri.IsAbsoluteUri || BaseAddress != null)) || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> PostAsync(String requestUri, HttpContent content, CancellationToken cancellationToken)
+		{
+			Contract.Requires(requestUri != null || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> PostAsync(Uri requestUri, HttpContent content, CancellationToken cancellationToken)
+		{
+			Contract.Requires((requestUri != null && (requestUri.IsAbsoluteUri || BaseAddress != null)) || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> PutAsync(String requestUri, HttpContent content)
+		{
+			Contract.Requires(requestUri != null || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> PutAsync(Uri requestUri, HttpContent content)
+		{
+			Contract.Requires((requestUri != null && (requestUri.IsAbsoluteUri || BaseAddress != null)) || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> PutAsync(String requestUri, HttpContent content, CancellationToken cancellationToken)
+		{
+			Contract.Requires(requestUri != null || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> PutAsync(Uri requestUri, HttpContent content, CancellationToken cancellationToken)
+		{
+			Contract.Requires((requestUri != null && (requestUri.IsAbsoluteUri || BaseAddress != null)) || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> SendAsync(HttpRequestMessage request)
+		{
+			Contract.Requires(request != null);
+			Contract.Requires((request.RequestUri != null && (request.RequestUri.IsAbsoluteUri || BaseAddress != null)) || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+		{
+			Contract.Requires(request != null);
+			Contract.Requires((request.RequestUri != null && (request.RequestUri.IsAbsoluteUri || BaseAddress != null)) || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, HttpCompletionOption completionOption)
+		{
+			Contract.Requires(request != null);
+			Contract.Requires((request.RequestUri != null && (request.RequestUri.IsAbsoluteUri || BaseAddress != null)) || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+
+		public Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+		{
+			Contract.Requires(request != null);
+			Contract.Requires((request.RequestUri != null && (request.RequestUri.IsAbsoluteUri || BaseAddress != null)) || BaseAddress != null);
+			Contract.Ensures(Contract.Result<Task<HttpResponseMessage>>() != null);
+			return null;
+		}
+	}
+
 	public static class IHttpClientExtensions
 	{
 		public static IHttpClient Wrap(this HttpClient httpClient)
@@ -77,13 +335,19 @@ namespace Zoltu.Wrapper.SystemWrapper.Net.Http
 
 		public HttpRequestHeaders DefaultRequestHeaders
 		{
-			get { return _httpClient.DefaultRequestHeaders; }
+			get
+			{
+				var defaultRequestHeaders = _httpClient.DefaultRequestHeaders;
+				Contract.Assume(defaultRequestHeaders != null);
+				return defaultRequestHeaders;
+			}
 		}
 
-		public long MaxResponseContentBufferSize
+		public Int64 MaxResponseContentBufferSize
 		{
 			get
 			{
+				Contract.Assume(_httpClient.MaxResponseContentBufferSize > 0);
 				return _httpClient.MaxResponseContentBufferSize;
 			}
 			set
@@ -96,7 +360,9 @@ namespace Zoltu.Wrapper.SystemWrapper.Net.Http
 		{
 			get
 			{
-				return _httpClient.Timeout;
+				var timeout = _httpClient.Timeout;
+				Contract.Assume(timeout >= System.Threading.Timeout.InfiniteTimeSpan);
+				return timeout;
 			}
 			set
 			{
@@ -111,152 +377,212 @@ namespace Zoltu.Wrapper.SystemWrapper.Net.Http
 
 		public Task<HttpResponseMessage> DeleteAsync(Uri requestUri)
 		{
-			return _httpClient.DeleteAsync(requestUri);
+			var task = _httpClient.DeleteAsync(requestUri);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> DeleteAsync(String requestUri)
 		{
-			return _httpClient.DeleteAsync(requestUri);
+			var task = _httpClient.DeleteAsync(requestUri);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> DeleteAsync(Uri requestUri, CancellationToken cancellationToken)
 		{
-			return _httpClient.DeleteAsync(requestUri, cancellationToken);
+			var task = _httpClient.DeleteAsync(requestUri, cancellationToken);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> DeleteAsync(String requestUri, CancellationToken cancellationToken)
 		{
-			return _httpClient.DeleteAsync(requestUri, cancellationToken);
+			var task = _httpClient.DeleteAsync(requestUri, cancellationToken);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> GetAsync(Uri requestUri)
 		{
-			return _httpClient.GetAsync(requestUri);
+			var task = _httpClient.GetAsync(requestUri);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> GetAsync(String requestUri)
 		{
-			return _httpClient.GetAsync(requestUri);
+			var task = _httpClient.GetAsync(requestUri);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> GetAsync(Uri requestUri, HttpCompletionOption completionOption)
 		{
-			return _httpClient.GetAsync(requestUri, completionOption);
+			var task = _httpClient.GetAsync(requestUri, completionOption);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> GetAsync(Uri requestUri, CancellationToken cancellationToken)
 		{
-			return _httpClient.GetAsync(requestUri, cancellationToken);
+			var task = _httpClient.GetAsync(requestUri, cancellationToken);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> GetAsync(String requestUri, CancellationToken cancellationToken)
 		{
-			return _httpClient.GetAsync(requestUri, cancellationToken);
+			var task = _httpClient.GetAsync(requestUri, cancellationToken);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> GetAsync(String requestUri, HttpCompletionOption completionOption)
 		{
-			return _httpClient.GetAsync(requestUri, completionOption);
+			var task = _httpClient.GetAsync(requestUri, completionOption);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> GetAsync(Uri requestUri, HttpCompletionOption completionOption, CancellationToken cancellationToken)
 		{
-			return _httpClient.GetAsync(requestUri, completionOption, cancellationToken);
+			var task = _httpClient.GetAsync(requestUri, completionOption, cancellationToken);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> GetAsync(String requestUri, HttpCompletionOption completionOption, CancellationToken cancellationToken)
 		{
-			return _httpClient.GetAsync(requestUri, completionOption, cancellationToken);
+			var task = _httpClient.GetAsync(requestUri, completionOption, cancellationToken);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<Byte[]> GetByteArrayAsync(Uri requestUri)
 		{
-			return _httpClient.GetByteArrayAsync(requestUri);
+			var task = _httpClient.GetByteArrayAsync(requestUri);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<Byte[]> GetByteArrayAsync(String requestUri)
 		{
-			return _httpClient.GetByteArrayAsync(requestUri);
+			var task = _httpClient.GetByteArrayAsync(requestUri);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<Stream> GetStreamAsync(Uri requestUri)
 		{
-			return _httpClient.GetStreamAsync(requestUri);
+			var task = _httpClient.GetStreamAsync(requestUri);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<Stream> GetStreamAsync(String requestUri)
 		{
-			return _httpClient.GetStreamAsync(requestUri);
+			var task = _httpClient.GetStreamAsync(requestUri);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<String> GetStringAsync(Uri requestUri)
 		{
-			return _httpClient.GetStringAsync(requestUri);
+			var task = _httpClient.GetStringAsync(requestUri);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<String> GetStringAsync(String requestUri)
 		{
-			return _httpClient.GetStringAsync(requestUri);
+			var task = _httpClient.GetStringAsync(requestUri);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> PostAsync(Uri requestUri, HttpContent content)
 		{
-			return _httpClient.PostAsync(requestUri, content);
+			var task = _httpClient.PostAsync(requestUri, content);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> PostAsync(String requestUri, HttpContent content)
 		{
-			return _httpClient.PostAsync(requestUri, content);
+			var task = _httpClient.PostAsync(requestUri, content);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> PostAsync(Uri requestUri, HttpContent content, CancellationToken cancellationToken)
 		{
-			return _httpClient.PostAsync(requestUri, content, cancellationToken);
+			var task = _httpClient.PostAsync(requestUri, content, cancellationToken);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> PostAsync(String requestUri, HttpContent content, CancellationToken cancellationToken)
 		{
-			return _httpClient.PostAsync(requestUri, content, cancellationToken);
+			var task = _httpClient.PostAsync(requestUri, content, cancellationToken);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> PutAsync(Uri requestUri, HttpContent content)
 		{
-			return _httpClient.PutAsync(requestUri, content);
+			var task = _httpClient.PutAsync(requestUri, content);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> PutAsync(String requestUri, HttpContent content)
 		{
-			return _httpClient.PutAsync(requestUri, content);
+			var task = _httpClient.PutAsync(requestUri, content);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> PutAsync(Uri requestUri, HttpContent content, CancellationToken cancellationToken)
 		{
-			return _httpClient.PutAsync(requestUri, content, cancellationToken);
+			var task = _httpClient.PutAsync(requestUri, content, cancellationToken);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> PutAsync(String requestUri, HttpContent content, CancellationToken cancellationToken)
 		{
-			return _httpClient.PutAsync(requestUri, content, cancellationToken);
+			var task = _httpClient.PutAsync(requestUri, content, cancellationToken);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> SendAsync(HttpRequestMessage request)
 		{
-			return _httpClient.SendAsync(request);
+			var task = _httpClient.SendAsync(request);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, HttpCompletionOption completionOption)
 		{
-			return _httpClient.SendAsync(request, completionOption);
+			var task = _httpClient.SendAsync(request, completionOption);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
-			return _httpClient.SendAsync(request, cancellationToken);
+			var task = _httpClient.SendAsync(request, cancellationToken);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
 		{
-			return _httpClient.SendAsync(request, completionOption, cancellationToken);
+			var task = _httpClient.SendAsync(request, completionOption, cancellationToken);
+			Contract.Assume(task != null);
+			return task;
 		}
 
 		public HttpClientWrapper(HttpClient httpClient)
