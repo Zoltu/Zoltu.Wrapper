@@ -125,18 +125,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="System\Diagnostics\FileVersionInfo.cs" />
-    <Compile Include="System\Diagnostics\IFileVersionInfo.cs" />
-    <Compile Include="System\Diagnostics\IProcess.cs" />
-    <Compile Include="System\Diagnostics\IProcessModule.cs" />
-    <Compile Include="System\Diagnostics\IProcessStatic.cs" />
-    <Compile Include="System\Diagnostics\Process.cs" />
-    <Compile Include="System\Diagnostics\ProcessModule.cs" />
-    <Compile Include="System\Diagnostics\ProcessStatic.cs" />
-    <Compile Include="System\IO\IFileStatic.cs" />
-    <Compile Include="System\Net\DnsStatic.cs" />
-    <Compile Include="System\Net\Http\IHttpClient.cs" />
-    <Compile Include="System\Net\IDnsStatic.cs" />
+    <Compile Include="SystemWrapper\Diagnostics\FileVersionInfo.cs" />
+    <Compile Include="SystemWrapper\Diagnostics\IFileVersionInfo.cs" />
+    <Compile Include="SystemWrapper\Diagnostics\IProcess.cs" />
+    <Compile Include="SystemWrapper\Diagnostics\IProcessModule.cs" />
+    <Compile Include="SystemWrapper\Diagnostics\IProcessStatic.cs" />
+    <Compile Include="SystemWrapper\Diagnostics\Process.cs" />
+    <Compile Include="SystemWrapper\Diagnostics\ProcessModule.cs" />
+    <Compile Include="SystemWrapper\Diagnostics\ProcessStatic.cs" />
+    <Compile Include="SystemWrapper\IO\IFileStatic.cs" />
+    <Compile Include="SystemWrapper\Net\DnsStatic.cs" />
+    <Compile Include="SystemWrapper\Net\Http\IHttpClient.cs" />
+    <Compile Include="SystemWrapper\Net\IDnsStatic.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NuGet.targets" />
